@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState('');
-  const [currentGoals, setCurrentGoals] = useState([]);
+  const [courseGoals, setcourseGoals] = useState([]);
 
-  const addGoalHandler = () => setCurrentGoals(currentGoals => [...currentGoals, enteredGoal])
+  const addGoalHandler = () =>
+    setcourseGoals(courseGoals => [...courseGoals, { id: Math.random(), value: enteredGoal }])
   return (
     <ScrollView style={styles.screen}>
       <View style={styles.inputContainer}>
@@ -18,34 +19,37 @@ export default function App() {
         <Button title="Add" onPress={addGoalHandler} />
       </View>
       <View>
-        {currentGoals.map(goal =>
-          (<View key={Math.random} style={styles.listItem}>
-            <Text >{goal}</Text>
-          </View>))
-        }
+        <FlatList
+          data={courseGoals}
+          renderItem={itemData => (
+            <View style={styles.listItem}>
+              <Text >{itemData.item.value}</Text>
+            </View>
+          )}
+        />
       </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    padding: 50
+        screen: {
+        padding: 50
   },
   inputContainer: {
-    flexDirection: 'row',
+        flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   input: {
-    width: '80%',
+        width: '80%',
     borderColor: 'black',
     borderWidth: 1,
     padding: 10,
     borderRadius: 7,
   },
   listItem: {
-    padding: 10,
+        padding: 10,
     marginTop: 10,
     backgroundColor: '#ccc',
     borderColor: 'black',
