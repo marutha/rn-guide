@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { View, TextInput, Button, StyleSheet } from 'react-native'
+import { View, TextInput, Button, StyleSheet, } from 'react-native'
 
 const GoalInput = props => {
   const [enteredGoal, setEnteredGoal] = useState('');
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
@@ -15,6 +16,8 @@ const GoalInput = props => {
     </View>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   inputContainer: {
